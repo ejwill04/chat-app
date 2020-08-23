@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server for chat app",
+  "main": "index.js",
+  "author": "Elijah Williams",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node": "^14.8.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd ../client && yarn start",
+    "install-deps": "yarn && cd ../client && yarn",
+    "server": "node index.js",
+    "start-app": "concurrently \"yarn server\" \"yarn client\""
+  }
+}
