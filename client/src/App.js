@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import io from 'socket.io-client';
+
 import './App.css';
 
+const socket = io.connect('http://localhost:8000');
+
 function App() {
+  const [msg, setMsg] = useState('');
+
+  const onTextChange = e => {
+    setMsg(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    socket.emit('message', msg);
+    setMsg('');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input 
+        onChange={onTextChange} 
+        value={msg} 
+      />
+      <button 
+        onClick={handleSubmit}>
+          >
+      </button>
     </div>
   );
 }
