@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const ChatTread = ({ chat }) => {
+import './style.css';
+
+const ChatThread = ({ chat }) => {
   return (
-    <div>
+    <div className='chatThread'>
       {chat.map(({ msg, username }, index) => (
-        <div key={index}>
+        <div key={index} className='msg'>
           {username && <span>{username}: </span>}
           <span>{msg}</span>
         </div>
@@ -45,16 +47,23 @@ function Chat({ socket }) {
   };
 
   return (
-    <div>
-      <input
-        onChange={onTextChange}
-        value={msg}
-      />
-      <button
-        onClick={handleSubmit}>
-        >
-      </button>
-      <ChatTread chat={chat} />
+    <div className='chat'>
+      <h2>
+        Chat App - Let's Start Chatting
+      </h2>
+      <ChatThread chat={chat} />
+      <span className='chatForm'>
+        <input
+          className='chatForm-input'
+          onChange={onTextChange}
+          value={msg}
+          placeholder='Type your message here'
+        />
+        <button
+          onClick={handleSubmit}>
+          >
+        </button>
+      </span>
     </div>
   );
 }
