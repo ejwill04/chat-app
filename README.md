@@ -2,24 +2,26 @@ This repo provides a simple chat app that leverages a Node server, Socket.io, an
 
 ## Instructions
 
-From the root, please navigate to `/server`
-`yarn install-deps` will install all dependencies in both the client and server
-`yarn start-app` will start both the Node and Client servers
+1. From the root, please navigate to `/server`
+2. `yarn install-deps` will install all dependencies in both the client and server
+3. `yarn start-app` will start both the Node and Client servers
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Note: Please ensure you have a recent version of `Node` installed.  Any of the recent versions should suffice.  
 
 ## Approach
 
-I knew there's alot that could be done here, so I needed to find a quick way to spin everything up.  I chose to use `create-react-app` for the frontend since it's well-known and easy to spin up, even if I would not use all of it's functionality.  I went with a very simple `Node.js` server for simplicity.  For bi-directional communication, I chose `Socket.io` for it's simplicity and speed over a solution such as using `Websockets` directly.
+I knew there's alot that could be done here, so I needed to find a quick way to spin everything up.  I chose to use `create-react-app` for the frontend since it's well-known and easy to spin up, even if I would not use all of it's functionality.  For bi-directional communication, I chose `Socket.io` for it's simplicity and speed over a solution such as using `Websockets` directly.  I went with a very simple `Node.js` server for simplicity.
 
 From here, it was quickly hacking together an application that would solve the high-level requirements:
 
-● It's possible to type a short message and have it sent to another user 
-● It's possible to see messages sent from another user appear reasonably soon after they were sent
+1. It's possible to type a short message and have it sent to another user 
+2. It's possible to see messages sent from another user appear reasonably soon after they were sent
 
+## Areas of Improvement
 
-## Areas of Improvement 
+This is not meant to be an exhaustive list but a starting point for conversation.
 
 [Note that I included some TODOs in the code that cover some of these points]
 
