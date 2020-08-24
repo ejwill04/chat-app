@@ -16,9 +16,20 @@ const ChatThread = ({ chat }) => {
   )
 }
 
-function Chat({ socket }) {
+function Chat({ socket, history }) {
   const [msg, setMsg] = useState('');
   const [chat, setChat] = useState([]);
+
+  useEffect(() => {
+    socket.emit('this user joined', null, username => {
+      if (!username) {
+        return history.push('/');
+      }
+    });
+    return () => {
+      socket.off('this user joined');
+    }
+  }, [socket])
 
   useEffect(() => {
     socket.on('new message', data => {
@@ -31,10 +42,10 @@ function Chat({ socket }) {
   }, [socket]);
 
   useEffect(() => {
-    socket.on('user joined', ({ username }) => {
+    socket.on('user joined', data => {
      // TODO - Appending data to end works for small usecase.  Consider some type of lazy loading.
      // It might also be nice to handle these types of messages with a different style.  Note no username.
-      setChat(chats => [...chats, { msg: `${username} joined` }]);
+      setChat(chats => [...chats, data]);
     });
     return () => {
       socket.off('user joined');

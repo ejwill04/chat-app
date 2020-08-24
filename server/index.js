@@ -28,10 +28,14 @@ io.on('connect', socket => {
     socket.username = username;
     addedUser = true;
     io.emit('user joined', {
-      username: socket.username,
+      msg: `${socket.username} joined`,
     });
 
     cb();
+  });
+
+  socket.on('this user joined', (undefined, cb) => {
+    cb(socket.username);
   });
 
   // TODO - Implement these methods on the client
