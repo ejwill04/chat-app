@@ -55,11 +55,11 @@ io.on('connect', socket => {
   // });
 
   // Triggered when a user disconnects
-  // socket.on('disconnect', () => {
-  //   if (addedUser) {
-  //     io.emit('user disconnect', {
-  //       username: socket.username
-  //     });
-  //   }
-  // });
+  socket.on('disconnect', () => {
+    if (addedUser) {
+      io.emit('user disconnect', {
+        msg: `${socket.username} left`
+      });
+    }
+  });
 });

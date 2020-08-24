@@ -29,7 +29,7 @@ function Chat({ socket, history }) {
     return () => {
       socket.off('this user joined');
     }
-  }, [socket])
+  }, [socket, history])
 
   useEffect(() => {
     socket.on('new message', data => {
@@ -48,7 +48,17 @@ function Chat({ socket, history }) {
       setChat(chats => [...chats, data]);
     });
     return () => {
+      socket.emit('disconnect');
       socket.off('user joined');
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on('user disconnect', data => {
+      setChat(chats => [...chats, data])
+    });
+    return () => {
+      socket.off('user disconnect');
     }
   }, [socket]);
 
