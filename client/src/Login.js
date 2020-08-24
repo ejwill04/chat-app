@@ -10,22 +10,22 @@ function Login({ socket, history }) {
   };
 
   const handleSubmitName = () => {
-    // a better approach would check for username uniqueness and ensure the username is clean
+    // TODO - Clean response and check for uniqueness
     socket.emit('add user', username, () => history.push('/chat'));
   }
 
   return (
-    <div className='login'>
+    <div id='login'>
       <h2>
         Chat App - Enter a Username
       </h2>
       <input
-        className='usernameInput'
+        id='usernameInput'
         onChange={onNameChange}
         value={username}
       />
       <button
-        className='usernameButton'
+        id='usernameButton'
         onClick={handleSubmitName}>
         Submit
     </button>

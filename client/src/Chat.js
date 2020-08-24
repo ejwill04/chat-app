@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 
 const ChatThread = ({ chat }) => {
+  // TODO - Get username to provide left/right styling based on message author
   return (
-    <div className='chatThread'>
+    <div id='chatThread'>
       {chat.map(({ msg, username }, index) => (
         <div key={index} className='msg'>
           {username && <span>{username}: </span>}
@@ -21,6 +22,7 @@ function Chat({ socket }) {
 
   useEffect(() => {
     socket.on('new message', data => {
+      // TODO - Appending data to end works for small usecase.  Consider some type of lazy loading.
       setChat(chats => [...chats, data])
     });
     return () => {
@@ -30,6 +32,8 @@ function Chat({ socket }) {
 
   useEffect(() => {
     socket.on('user joined', ({ username }) => {
+     // TODO - Appending data to end works for small usecase.  Consider some type of lazy loading.
+     // It might also be nice to handle these types of messages with a different style.  Note no username.
       setChat(chats => [...chats, { msg: `${username} joined` }]);
     });
     return () => {
@@ -42,19 +46,20 @@ function Chat({ socket }) {
   };
 
   const handleSubmit = () => {
+    // TODO - Clean response and consider limiting length/type of content
     socket.emit('new message', { msg });
     setMsg('');
   };
 
   return (
-    <div className='chat'>
+    <div id='chat'>
       <h2>
         Chat App - Let's Start Chatting
       </h2>
       <ChatThread chat={chat} />
-      <span className='chatForm'>
+      <span id='chatForm'>
         <input
-          className='chatForm-input'
+          id='chatForm-input'
           onChange={onTextChange}
           value={msg}
           placeholder='Type your message here'
