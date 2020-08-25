@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+import ChatThread from './ChatThread';
 import { sanitizeString } from './utils';
 import './style.css';
-
-const ChatThread = ({ chat }) => {
-  // TODO - Get username to provide left/right styling based on message author
-  return (
-    <div id="chatThread">
-      {chat.map(({ msg, username }, index) => (
-        <div key={index} className="msg">
-          {username && <span>{username}: </span>}
-          <span>{msg}</span>
-        </div>
-      ))}
-    </div>
-  );
-};
 
 function Chat({ socket, history }) {
   const [msg, setMsg] = useState('');
