@@ -1,3 +1,5 @@
+NOTE: This README is the standard CRA README but I chose to leave it in for clarity.  See the `root` for the project's README.  
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

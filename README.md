@@ -12,12 +12,23 @@ Note: Please ensure you have a recent version of `Node` installed.  Any of the r
 
 ## Approach
 
-I knew there's alot that could be done here, so I needed to find a quick way to spin everything up.  I chose to use `create-react-app` for the frontend since it's well-known and easy to spin up, even if I would not use all of it's functionality.  For bi-directional communication, I chose `Socket.io` for it's simplicity and speed over a solution such as using `Websockets` directly.  I went with a very simple `Node.js` server for simplicity.
+I knew there's alot that could be done here, so I needed to find a quick way to spin everything up.    I chose to use `create-react-app` for the frontend since it's well-known and easy to spin up, even if I would not use all of it's functionality.  For bi-directional communication, I chose `Socket.io` for it's simplicity and speed over a solution such as using `Websockets` directly.  I went with a very simple `Node.js` server for simplicity.
 
 From here, it was quickly hacking together an application that would solve the high-level requirements:
 
 1. It's possible to type a short message and have it sent to another user 
 2. It's possible to see messages sent from another user appear reasonably soon after they were sent
+
+I did add a few minor enhancements just for fun.
+
+1. A login page for adding a username
+2. Very basic and quick styling to give it sparkle
+3. Messages that specify when another user is typing
+4. Prompts for when a user joins and leaves the chat
+5. Basic XSS escapes on the client
+6. Super basic, don't really even want to mention it, "it renders" test
+7. A redirect if a user tries to go to `/chat` before entering a username
+8. Prettier for, well, making it pretty
 
 ## Areas of Improvement
 
@@ -25,13 +36,13 @@ This is not meant to be an exhaustive list but a starting point for conversation
 
 [Note that I included some TODOs in the code that cover some of these points]
 
-### No tests
+### Testing
 
-Both the client and server code need to be tested.  A number of unit tests would go a long way.  Happy/Sad path tests on the `socket.io` events would provide a great deal of comfort.
+Both the client and server code need to be tested.  This might be a great candidate for e2e tests around typing and adding messages.  
 
-### No user input validation
+### User input validation
 
-There's a number of reasons to add this.  From a usability perspective, this ensures that messages contain valid (define valid) data.  XSS is another reason.
+Improve usability by providing some basic validations.  The server needs a sanitizer around incoming messages and usersname.
 
 ### Styling 
 
