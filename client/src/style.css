@@ -22,6 +22,7 @@
   border: 1px solid lightslategray;
   background-color: white;
   padding: 1vw;
+  overflow: scroll;
 }
 
 #chatForm {
