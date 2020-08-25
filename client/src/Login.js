@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { sanitizeString } from './utils';
+
 import './style.css'
 
 function Login({ socket, history }) {
@@ -10,8 +12,8 @@ function Login({ socket, history }) {
   };
 
   const handleSubmitName = () => {
-    // TODO - Clean response and check for uniqueness
-    socket.emit('add user', username, () => history.push('/chat'));
+    // TODO - Check for uniqueness
+    socket.emit('add user', sanitizeString(username), () => history.push('/chat'));
   }
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { sanitizeString } from './utils';
 import './style.css';
 
 const ChatThread = ({ chat }) => {
@@ -19,6 +20,7 @@ const ChatThread = ({ chat }) => {
 function Chat({ socket, history }) {
   const [msg, setMsg] = useState('');
   const [chat, setChat] = useState([]);
+  const [typing, setTyping] = useState('');
 
   useEffect(() => {
     socket.emit('this user joined', null, username => {
@@ -62,13 +64,25 @@ function Chat({ socket, history }) {
     }
   }, [socket]);
 
+  useEffect(() => {
+    socket.on('typing', data => {
+      setTyping(data);
+    });
+    return () => {
+      socket.off('typing')
+    }
+  }, [socket]);
+
   const onTextChange = e => {
-    setMsg(e.target.value);
+    const str = e.target.value;
+    socket.emit('typing', Boolean(str.length));
+    setMsg(str);
   };
 
   const handleSubmit = () => {
-    // TODO - Clean response and consider limiting length/type of content
-    socket.emit('new message', { msg });
+    // TODO - Consider limiting length/type of content
+    socket.emit('new message', { msg: sanitizeString(msg) });
+    socket.emit('typing', false);
     setMsg('');
   };
 
@@ -77,19 +91,22 @@ function Chat({ socket, history }) {
       <h2>
         Chat App - Let's Start Chatting
       </h2>
-      <ChatThread chat={chat} />
-      <span id='chatForm'>
-        <input
-          id='chatForm-input'
-          onChange={onTextChange}
-          value={msg}
-          placeholder='Type your message here'
-        />
-        <button
-          onClick={handleSubmit}>
-          >
-        </button>
-      </span>
+      <div id='chatWrapper'>
+        <ChatThread chat={chat} />
+        <span id='chatForm'>
+          <input
+            onChange={onTextChange}
+            value={msg}
+            placeholder='Type your message here'
+            />
+          <button
+            id='chatForm-submitBtn'
+            onClick={handleSubmit}>
+            Send
+          </button>
+        </span>
+      </div>
+      {typing}
     </div>
   );
 }
