@@ -14,7 +14,7 @@ function Login({ socket, history }) {
   const handleSubmitName = () => {
     // TODO - Check for uniqueness
     socket.emit('add user', sanitizeString(username), () => history.push('/chat'));
-  }
+  };
 
   return (
     <div id='login'>

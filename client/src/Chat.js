@@ -22,6 +22,7 @@ function Chat({ socket, history }) {
   const [chat, setChat] = useState([]);
   const [typing, setTyping] = useState('');
 
+  // this user joined effect
   useEffect(() => {
     socket.emit('this user joined', null, username => {
       if (!username) {
@@ -31,8 +32,9 @@ function Chat({ socket, history }) {
     return () => {
       socket.off('this user joined');
     }
-  }, [socket, history])
+  }, [socket, history]);
 
+  // new message effect
   useEffect(() => {
     socket.on('new message', data => {
       // TODO - Appending data to end works for small usecase.  Consider some type of lazy loading.
@@ -43,6 +45,7 @@ function Chat({ socket, history }) {
     }
   }, [socket]);
 
+  // user joined effect
   useEffect(() => {
     socket.on('user joined', data => {
      // TODO - Appending data to end works for small usecase.  Consider some type of lazy loading.
@@ -55,6 +58,7 @@ function Chat({ socket, history }) {
     }
   }, [socket]);
 
+  // user disconnected effect
   useEffect(() => {
     socket.on('user disconnect', data => {
       setChat(chats => [...chats, data])
@@ -64,6 +68,7 @@ function Chat({ socket, history }) {
     }
   }, [socket]);
 
+  // a user is typing effect
   useEffect(() => {
     socket.on('typing', data => {
       setTyping(data);
