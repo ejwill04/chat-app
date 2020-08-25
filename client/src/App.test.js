@@ -1,12 +1,12 @@
-import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
+import React from 'react';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
-import Login from "./login";
+import Login from './login';
 
 let container = null;
 beforeEach(() => {
-  container = document.createElement("div");
+  container = document.createElement('div');
   document.body.appendChild(container);
 });
 
@@ -16,9 +16,11 @@ afterEach(() => {
   container = null;
 });
 
-it("renders the Chat App header", () => {
+it('renders the Chat App header', () => {
   act(() => {
     render(<Login />, container);
   });
-  expect(container.getElementsByTagName('h2')[0].textContent).toBe('Chat App - Enter a Username');  
+  expect(container.getElementsByTagName('h2')[0].textContent).toBe(
+    'Chat App - Enter a Username'
+  );
 });
