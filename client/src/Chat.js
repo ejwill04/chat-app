@@ -91,6 +91,12 @@ function Chat({ socket, history }) {
     setMsg('');
   };
 
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <div id="chat">
       <h2>Chat App - Let's Start Chatting</h2>
@@ -101,6 +107,7 @@ function Chat({ socket, history }) {
             onChange={onTextChange}
             value={msg}
             placeholder="Type your message here"
+            onKeyDown={handleKeyDown}
           />
           <button id="chatForm-submitBtn" onClick={handleSubmit}>
             Send
