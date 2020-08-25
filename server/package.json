@@ -8,8 +8,6 @@
   "type": "module",
   "dependencies": {
     "express": "^4.17.1",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "node": "^14.8.0",
     "socket.io": "^2.3.0"

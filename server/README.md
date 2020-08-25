@@ -2,9 +2,9 @@
 
 ### `yarn test`
 
-Run test suite, though no test our currently specified. 
+Run test suite, though no test our currently specified.
 
-### `yarn client` 
+### `yarn client`
 
 Start client server
 
