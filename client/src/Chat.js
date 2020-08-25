@@ -78,7 +78,7 @@ function Chat({ socket, history }) {
     setMsg('');
   };
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleSubmit();
     }
