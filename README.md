@@ -29,6 +29,7 @@ I did add a few minor enhancements just for fun.
 6. Super basic, don't really even want to mention it, "it renders" test
 7. A redirect if a user tries to go to `/chat` before entering a username
 8. Prettier for, well, making it pretty
+9. Auto scroll to bottom when new messages arrive
 
 ## Areas of Improvement
 
