@@ -38,21 +38,10 @@ io.on('connect', socket => {
     cb(socket.username);
   });
 
-  // TODO - Implement these methods on the client
-
   // Triggered when a user begins typing
-  // socket.on('typing', () => {
-  //   io.emit('typing', {
-  //     username: socket.username
-  //   });
-  // });
-
-  // Triggered when a user stops typing
-  // socket.on('stop typing', () => {
-  //   io.emit('stop typing', {
-  //     username: socket.username
-  //   });
-  // });
+  socket.on('typing', isTyping => {
+    socket.broadcast.emit('typing', isTyping ? `${socket.username} is typing` : '');
+  });
 
   // Triggered when a user disconnects
   socket.on('disconnect', () => {
